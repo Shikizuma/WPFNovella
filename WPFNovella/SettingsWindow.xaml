@@ -373,7 +373,7 @@
                 <ComboBoxItem Name="ItemUA">Ukrainian (UA)</ComboBoxItem>
                 <ComboBoxItem Name="ItemENG">English (ENG)</ComboBoxItem>
             </ComboBox>
-            <CheckBox x:Name="VoiceActingCheckBox" Style="{DynamicResource CheckBoxCustomStyle}" Content="Увімкнути озвучку" Foreground="#FFDCB83B" FontSize="30" FontFamily="Sitka Banner Semibold" Margin="35,30,0,0" IsChecked="True"/>
+            <CheckBox x:Name="VoiceActingCheckBox" Style="{DynamicResource CheckBoxCustomStyle}" Content="Увімкнути озвучку" Foreground="#FFDCB83B" FontSize="30" FontFamily="Sitka Banner Semibold" Margin="35,30,0,0" IsChecked="False"/>
 
         </StackPanel>
 

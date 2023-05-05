@@ -44,7 +44,7 @@ namespace WPFNovella
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
             mediaButton.Open(new Uri("Resources\\button-8-88355.mp3", UriKind.Relative));
-            mediaButton.Volume = 0.05;
+            mediaButton.Volume = 0.02;
             mediaButton.Play();
             Border border = (Border)sender;
             border.BorderBrush = Brushes.DarkOrange;
