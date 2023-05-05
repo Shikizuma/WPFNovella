@@ -1,0 +1,402 @@
+﻿<Window x:Class="WPFNovella.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFNovella"
+        mc:Ignorable="d"
+        Title="SettingsWindow" Height="600" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent" Initialized="Window_Initialized">
+    <!--<Window.Background>
+        <ImageBrush ImageSource="/Resources/dark_souls_fireSett.jpg" Stretch="UniformToFill"/>
+    </Window.Background>-->
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="5"
+                  CornerRadius="1"
+                  Background="#FF3F3F3F"
+                  BorderBrush="Black"
+                  BorderThickness="1" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="0" 
+                  Margin="1" 
+                  Background="#FF3F3F3F" 
+                  BorderBrush="Black"
+                  BorderThickness="0,0,1,0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="Black"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="12,12,23,12"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="Black"
+                            Foreground="Green"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border 
+                                x:Name="DropDownBorder"
+                                Background="#FF3F3F3F"
+                                BorderThickness="1"
+                                BorderBrush="Black"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <!--SimpleStyles: ComboBoxItem-->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="#FFDCB83B"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#8896ab"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+        <!--SliderCustom-->
+        <SolidColorBrush x:Key="CustomSliderBackgroundSolidColorBrush" Color="Black" />
+
+        <LinearGradientBrush x:Key="CustomSliderForegroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#65351F" Offset="0.2" />
+            <GradientStop Color="#9B5B2B" Offset="0.5" />
+            <GradientStop Color="#65351F" Offset="0.8" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="CustomSliderThumBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#646864" Offset="0.2" />
+            <GradientStop Color="#FF5F5F5D" Offset="0.5" />
+            <GradientStop Color="#646864" Offset="0.8" />
+        </LinearGradientBrush>
+
+        <Style x:Key="CustomSliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Canvas SnapsToDevicePixels="true">
+                            <Grid Height="35" Width="55">
+                                <Rectangle x:Name="Background"
+                            Fill="{StaticResource CustomSliderThumBrush}" Stroke="Black"
+                            Height="35" Width="55"
+                            RadiusX="3" RadiusY="3"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Foreground="#FFDCB83B" FontSize="20"
+                            Text="{Binding Value, RelativeSource={RelativeSource AncestorType={x:Type Slider}}}"/>
+                            </Grid>
+                        </Canvas>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="Background" Value="#938581"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="true">
+                                <Setter Property="Fill" TargetName="Background" Value="{StaticResource CustomSliderThumBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="Background"  Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="CustomSliderControlTemplate" TargetType="{x:Type Slider}">
+            <Border Background="Transparent" SnapsToDevicePixels="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{TemplateBinding MinHeight}" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel LastChildFill="True">
+                        <Border x:Name="PART_SelectionRange" Height="30" ClipToBounds="True" Visibility="Visible">
+                            <Rectangle Margin="0 0 -10 0" RadiusX="2" RadiusY="2" Fill="{StaticResource CustomSliderForegroundBrush}" />
+                        </Border>
+                        <Border ClipToBounds="True" Height="30" Visibility="Visible">
+                            <Rectangle Margin="0 0 0 0" RadiusX="2" RadiusY="2" Fill="{StaticResource CustomSliderBackgroundSolidColorBrush}" />
+                        </Border>
+                    </DockPanel>
+
+                    <Track x:Name="PART_Track">
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource CustomSliderThumbStyle}" VerticalAlignment="Center"
+                            Width="{TemplateBinding MinWidth}" Height="{TemplateBinding MinHeight}" OverridesDefaultStyle="True" Focusable="False" />
+                        </Track.Thumb>
+                    </Track>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <Style x:Key="CustomSliderStyle" TargetType="{x:Type Slider}">
+            <Setter Property="Template" Value="{StaticResource CustomSliderControlTemplate}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="20" />
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="MaxHeight" Value="20" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="AutoToolTipPlacement" Value="None" />
+            <Setter Property="IsMoveToPointEnabled" Value="True" />
+            <Setter Property="SelectionStart" Value="0" />
+            <Setter Property="SelectionEnd" Value="{Binding Path=Value, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="OptionMarkFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--CustomCheckBox-->
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FFDCB83B"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="Orange"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FFDCB83B"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="DarkOrange"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <Style x:Key="CheckBoxCustomStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid">
+                                    <Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource OptionMark.Static.Glyph}" Margin="8,8,8,8" Opacity="0" Stretch="None"/>
+                                    <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                                <Setter Property="Padding" Value="10,-1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="115*"/>
+        </Grid.RowDefinitions>
+
+
+        <Border x:Name="BorderSettingss" BorderBrush="Black" BorderThickness="2" CornerRadius="20,20,12,12" Background="#FF231F1F" Opacity="1" Margin="10,10,10,10" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Label x:Name="ChoiceLangLabel" Content="Виберіть мову:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFDCB83B" FontSize="34" FontFamily="Sitka Banner Semibold" Margin="30,10,0,0"/>
+            <ComboBox x:Name="LanguageComboBox" Width="265" Height="55" HorizontalAlignment="Left" Background="#FF8A817C" Margin="35,0,0,0" FontSize="28" FontFamily="Sitka Banner Semibold" Foreground="#FFDCB83B" BorderThickness="1" BorderBrush="Black" SelectedIndex="0">
+                <ComboBoxItem Name="ItemUA">Ukrainian (UA)</ComboBoxItem>
+                <ComboBoxItem Name="ItemENG">English (ENG)</ComboBoxItem>
+            </ComboBox>
+            <CheckBox x:Name="VoiceActingCheckBox" Style="{DynamicResource CheckBoxCustomStyle}" Content="Увімкнути озвучку" Foreground="#FFDCB83B" FontSize="30" FontFamily="Sitka Banner Semibold" Margin="35,30,0,0" IsChecked="True"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Vertical">
+            <Label x:Name="VolumaMusicLabel" Content="Гучність музики:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFDCB83B" FontSize="34" FontFamily="Sitka Banner Semibold" Margin="15,10,0,0"/>
+            <Slider x:Name="MusicSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="100"/>
+            <Label x:Name="VolumeVoiceLabel" Content="Гучність голоса:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFDCB83B" FontSize="34" FontFamily="Sitka Banner Semibold" Margin="15,30,0,0"/>
+            <Slider x:Name="VoiceSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="100"/>
+        </StackPanel>
+        
+        <StackPanel Grid.ColumnSpan="2">
+            <Label x:Name="SettingsLabel" Content="Налаштування" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="45" Foreground="#FFDCB83B" Margin="0,25,0,0" FontFamily="Sitka Banner Semibold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Border x:Name="BorderBack" BorderBrush="Black" BorderThickness="2" Height="80" Width="220" Margin="40,0,0,15" CornerRadius="20,20,12,12" Background="#FF524949" Opacity="0.97" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="BorderBack_MouseLeftButtonDown" >
+                <Label x:Name="BackLabel" Content="Назад" Foreground="#FFDCB83B" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Sitka Banner Semibold"/>
+            </Border>
+            <Border x:Name="BorderAccept" BorderBrush="Black" BorderThickness="2" Height="80" Width="220" Margin="280,0,0,15" CornerRadius="20,20,12,12" Background="#FF524949" Opacity="0.97"  HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="BorderAccept_MouseLeftButtonDown" >
+                <Label x:Name="AcceptLabel" Content="Застосувати" Foreground="#FFDCB83B" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontFamily="Sitka Banner Semibold"/>
+            </Border>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

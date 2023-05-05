@@ -1,0 +1,289 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fotor-ai-20230502223742.jpg" />
+    <None Remove="Resources\1-04 Iudex Gundyr.mp3" />
+    <None Remove="Resources\1-05 Firelink Shrine.mp3" />
+    <None Remove="Resources\1-07 Curse-Rotted Greatwood.mp3" />
+    <None Remove="Resources\1-17 Dancer Of The Boreal Valley.mp3" />
+    <None Remove="Resources\1-18 Oceiros, The Consumed King.mp3" />
+    <None Remove="Resources\1-25 Epilogue.mp3" />
+    <None Remove="Resources\1.jpg" />
+    <None Remove="Resources\1495318152_ev1ct_fire-keeper.jpg" />
+    <None Remove="Resources\1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg" />
+    <None Remove="Resources\2-07 Unused Track 6.mp3" />
+    <None Remove="Resources\2-10 Sister Friede and Father Ariandel.mp3" />
+    <None Remove="Resources\5227654.jpg" />
+    <None Remove="Resources\697790.jpg" />
+    <None Remove="Resources\92361-games-arts-the-keeper-of-fire-fire-keeper-dark.jpg" />
+    <None Remove="Resources\afterDeadIzolita.jpg" />
+    <None Remove="Resources\angryGvin.jpg" />
+    <None Remove="Resources\animalsFear.jpg" />
+    <None Remove="Resources\army.jpg" />
+    <None Remove="Resources\army2.jpg" />
+    <None Remove="Resources\blackSoul.jpg" />
+    <None Remove="Resources\c123c6c3f80b0668b8b7a46cdbb28722.jpg" />
+    <None Remove="Resources\castleCharodeiki.jpg" />
+    <None Remove="Resources\charodeika.jpg" />
+    <None Remove="Resources\charodeikaDead.jpg" />
+    <None Remove="Resources\compas.jpg" />
+    <None Remove="Resources\crystall.jpg" />
+    <None Remove="Resources\dark-souls-ii-humanity-knight.jpg" />
+    <None Remove="Resources\deadGvin.jpg" />
+    <None Remove="Resources\f75d3239266dbfab17a9c17ffb4a270a.jpg" />
+    <None Remove="Resources\firstLight.jpg" />
+    <None Remove="Resources\flowers.jpg" />
+    <None Remove="Resources\fotor-ai-202305030380.jpg" />
+    <None Remove="Resources\fotor-ai-2023050311139.jpg" />
+    <None Remove="Resources\gigants.jpg" />
+    <None Remove="Resources\greaterFlame.jpg" />
+    <None Remove="Resources\gvinAttack.jpg" />
+    <None Remove="Resources\GvinNear.jpg" />
+    <None Remove="Resources\hero.jpg" />
+    <None Remove="Resources\heroEnd.jpg" />
+    <None Remove="Resources\hram.jpg" />
+    <None Remove="Resources\hranitelnicaSay.jpg" />
+    <None Remove="Resources\ImagesForGame\dragonsBlackAi.jpg" />
+    <None Remove="Resources\izalitaAttack.jpg" />
+    <None Remove="Resources\IzalitaNear.jpg" />
+    <None Remove="Resources\izolitaFace.jpg" />
+    <None Remove="Resources\katokombi.jpg" />
+    <None Remove="Resources\knightAttack.jpg" />
+    <None Remove="Resources\mountains.jpg" />
+    <None Remove="Resources\nedryKatak.jpg" />
+    <None Remove="Resources\nepogashiy.jpg" />
+    <None Remove="Resources\nito.jpg" />
+    <None Remove="Resources\nitoDead.jpg" />
+    <None Remove="Resources\nitoNear.jpg" />
+    <None Remove="Resources\nws_dark_souls3_001.jpg" />
+    <None Remove="Resources\photo_2023-05-03_18-31-50.jpg" />
+    <None Remove="Resources\pigmeygnom.jpg" />
+    <None Remove="Resources\povelitelLight.jpg" />
+    <None Remove="Resources\priroda.jpg" />
+    <None Remove="Resources\pustoshi.jpg" />
+    <None Remove="Resources\Rashed_AlAkroka_dark_souls_3_fantasy_art_sword_knight_eclipse_sparks_women-1934187.jpg" />
+    <None Remove="Resources\right-arrow.png" />
+    <None Remove="Resources\siluet.jpg" />
+    <None Remove="Resources\stormPunch.jpg" />
+    <None Remove="Resources\theEnd.jpg" />
+    <None Remove="Resources\warriors.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\1-02 Prologue.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>MainMusic</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-04 Iudex Gundyr.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-05 Firelink Shrine.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-07 Curse-Rotted Greatwood.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-17 Dancer Of The Boreal Valley.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-18 Oceiros, The Consumed King.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\1-25 Epilogue.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\2-07 Unused Track 6.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\2-10 Sister Friede and Father Ariandel.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\button-8-88355.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Resources\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\1495318152_ev1ct_fire-keeper.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\5227654.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\697790.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\92361-games-arts-the-keeper-of-fire-fire-keeper-dark.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\afterDeadIzolita.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\angryGvin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\c123c6c3f80b0668b8b7a46cdbb28722.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\castleCharodeiki.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\charodeikaDead.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\compas.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\dark-souls-ii-humanity-knight.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\deadGvin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\f75d3239266dbfab17a9c17ffb4a270a.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\flowers.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\gvinAttack.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GvinNear.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\heroEnd.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\hram.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\hranitelnicaSay.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\izalitaAttack.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\IzalitaNear.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\izolitaFace.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\katokombi.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\knightAttack.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\mountains.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nedryKatak.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nitoDead.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nitoNear.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nws_dark_souls3_001.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\photo_2023-05-03_18-31-50.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\priroda.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\animalsFear.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\army.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\army2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\blackSoul.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\charodeika.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\crystall.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\firstLight.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fotor-ai-202305030380.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <EmbeddedResource Include="Resources\knight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="fotor-ai-20230502223742.jpg" />
+    <Resource Include="helmet.png" />
+    <Resource Include="knight.png" />
+    <Resource Include="Resources\ds3_game-thumbnail.jpg" />
+    <Resource Include="Resources\fotor-ai-2023050311139.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\gigants.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\greaterFlame.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\hero.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nepogashiy.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\nito.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\pigmeygnom.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\povelitelLight.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\pustoshi.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rashed_AlAkroka_dark_souls_3_fantasy_art_sword_knight_eclipse_sparks_women-1934187.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\right-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\siluet.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\stormPunch.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\theEnd.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\warriors.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
