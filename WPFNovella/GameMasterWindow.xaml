@@ -150,11 +150,11 @@
             <ColumnDefinition Width="193*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="530*"/>
-            <RowDefinition Height="190*"/>
+            <RowDefinition Height="491*"/>
+            <RowDefinition Height="213*"/>
         </Grid.RowDefinitions>
         <Image x:Name="GameImage" Opacity="1" Grid.Row="0"  Grid.RowSpan="2" Source="/fotor-ai-20230502223742.jpg" Stretch="Fill" Grid.ColumnSpan="3" />
-        <Border x:Name="FooterBorder" Opacity="0.85" BorderBrush="Black" BorderThickness="3"  Background="#FF151313" Height="190" Grid.ColumnSpan="3" MouseLeftButtonDown="FooterBorder_MouseLeftButtonDown" Margin="-14,518,-16,-4" Grid.RowSpan="2">
+        <Border x:Name="FooterBorder" Opacity="0.85" BorderBrush="Black" BorderThickness="3"  Background="#FF151313" Grid.ColumnSpan="3" MouseLeftButtonDown="FooterBorder_MouseLeftButtonDown" Margin="0,2,-16,-4" Grid.Row="1">
             <Border.Style>
                 <Style TargetType="Border">
                     <Style.Triggers>
@@ -165,10 +165,10 @@
                 </Style>
             </Border.Style>
             <StackPanel Margin="193,0,193,0">
-                <TextBox Opacity="0.95" x:Name="InfoTextBox" Background="Transparent" BorderBrush="Transparent" SelectionBrush="Transparent"  FontSize="24" Padding="12, 16, 12, 12" FontFamily="Sitka Banner Semibold" TextWrapping="Wrap" Text="На початку світ був холодним і похмурим місцем. Тієї дивної пори не існувало ні часу, ні життя, ні смерті, бо єдиними господарями пустельних земель були безсмертні дракони." Width="891" Height="190" Grid.Column="1" Foreground="#FFAB8D3A" IsReadOnly="True" IsUndoEnabled="False"/>
+                <TextBox Opacity="0.95" x:Name="InfoTextBox" Background="Transparent" BorderBrush="Transparent" SelectionBrush="Transparent"  FontSize="24" Padding="12, 16, 12, 12" FontFamily="Sitka Banner Semibold" TextWrapping="Wrap" Text="" Width="892" Height="208" Grid.Column="1" Foreground="#FFAB8D3A" IsReadOnly="True" IsUndoEnabled="False"/>
             </StackPanel>
         </Border>
-        <Border x:Name="ArrowBorder" Grid.Column="2" Margin="25,45,25,41" Grid.Row="1" MouseLeftButtonDown="FooterBorder_MouseLeftButtonDown">
+        <Border x:Name="ArrowBorder" Grid.Column="2" Margin="25,43,25,43" Grid.Row="1" MouseLeftButtonDown="FooterBorder_MouseLeftButtonDown">
             <Border.Background>
                 <ImageBrush ImageSource="/Resources/right-arrow.png" />
             </Border.Background>
@@ -179,6 +179,6 @@
         <Button x:Name="ButtonAnswerOne" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
         <Button x:Name="ButtonAnswerTwo" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,208,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
         <Button x:Name="ButtonAnswerThree" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,321,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
-        <Label x:Name="TheEndLabel" Grid.Column="1" Content="THE END" FontSize="150" Foreground="Black" HorizontalAlignment="Center" Margin="0,190,0,0" VerticalAlignment="Top" Height="Auto" Width="Auto" FontFamily="Sitka Banner Semibold" Visibility="Hidden"/>
+        <Label x:Name="TheEndLabel" Grid.Column="1" Content="THE END" FontSize="150" Foreground="Black" HorizontalAlignment="Center" Margin="0,190,0,0" VerticalAlignment="Top" Height="198" Width="586" FontFamily="Sitka Banner Semibold" Visibility="Hidden"/>
     </Grid>
 </Window>

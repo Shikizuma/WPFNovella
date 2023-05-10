@@ -67,9 +67,28 @@ namespace WPFNovella
             buttonEffect.Begin();
         }
 
+        void Localization()
+        {
+            string dictionaryPath = "";
+            if(MainWindow.gameProp.PropLanguage == "Ukrainian (UA)")
+                dictionaryPath = $"Resources\\Dictionary\\UA-Dictionary.xaml";
+            else
+                dictionaryPath = $"Resources\\Dictionary\\ENG-Dictionary.xaml";
+
+            // загружаем ресурсный словарь из файла
+            ResourceDictionary dict = new ResourceDictionary();
+            dict.Source = new Uri(dictionaryPath, UriKind.Relative);
+
+            // устанавливаем словарь как главный для приложения
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(dict);
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Localization();
+            InfoTextBox.Text = (string)Application.Current.FindResource("startStory0");
+
             PlaybackMusic("Resources\\1-05 Firelink Shrine.mp3");
 
             FadeImage(); 
@@ -140,17 +159,17 @@ namespace WPFNovella
             {
                 counter++;
                 PlaybackMusic("Resources\\1-17 Dancer Of The Boreal Valley.mp3");
-                ChangeFrame("*Пробудившись, ти знайшов джерело священного вогню*", "hero.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory0"), "hero.jpg");
             }
             else if (counter == 19)
             {
                 counter++;
-                ChangeFrame("*Сидячи біля нього ти почув звуки кроків ззаду*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory1"));
             }
             else if(counter == 20)
             {
                 counter++;
-                ChangeFrame("*До джерела вогню підійшла якась дівчина*", "Rashed_AlAkroka_dark_souls_3_fantasy_art_sword_knight_eclipse_sparks_women-1934187.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory2"), "Rashed_AlAkroka_dark_souls_3_fantasy_art_sword_knight_eclipse_sparks_women-1934187.jpg");
             }
             else if (counter == 21)
             {
@@ -162,8 +181,11 @@ namespace WPFNovella
 
                 await Task.Delay(2000);
                 FadeButton();
-                ButtonAnswerOne.Content = "Хто ти?!";
-                ButtonAnswerTwo.Content = "Де я?";
+
+                //string btn1Text = ;
+
+                ButtonAnswerOne.Content = (string)Application.Current.FindResource("btnString0");
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString1");
                 ButtonAnswerThree.Content = "...";
 
                 ButtonAnswerOne.Visibility = Visibility.Visible;
@@ -180,7 +202,7 @@ namespace WPFNovella
 
                 if (answerText == ButtonAnswerOne.Content)
                 {
-                    ChangeFrame("-Я – Емілія, хранителька вогню. Моя роль полягає в тому, щоб підтримувати вогонь, який тримає цей світ у рівновазі.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory3"));
 
                     await Task.Delay(2000);
 
@@ -189,12 +211,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Яке мое призначення?";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString2");
                     ButtonAnswerThree.Content = "...";
                 }
                 else if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("-Ти знаходишся біля багаття священного полум'я, місця, де незгаслі можуть відпочити та відновити сили. Він також служить дороговказом для мандрівників, які блукають світом.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory4"));
                     
                     await Task.Delay(2000);
 
@@ -203,12 +225,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "-Яке мое призначення?";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString2");
                     ButtonAnswerThree.Content = "...";
                 }
                 else
                 {
-                    ChangeFrame("*після деякого часу* -Ти, мабуть, відчуваєш зміни у світі, чи не так? Після того, як володарі відібрали душу Пігмея, світ поринув у пітьму. Але зараз, незгаслі знову прокинулися і світ отримав новий шанс на спасіння. Я вдячна тобі за це.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory5"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -216,7 +238,7 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Дякую, яке мое призначення?";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString3");
                     ButtonAnswerThree.Content = "...";
                 }
 
@@ -228,7 +250,7 @@ namespace WPFNovella
          
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("-Ти з'явився підходящий момент. Тільки Незгаслий може принести світло у цей світ, і ти можеш стати нашим героєм, який врятує його від пітьми.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory6"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -236,12 +258,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Що мені потрібно робити?";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString4");
                     ButtonAnswerThree.Content = "...";
                 }
                 else
                 {
-                    ChangeFrame("-Ти Незгаслий, це означає, що ти є обранцем великого вогню. Твоя роль – знищити володарів, які заволоділи великими темними душами, через яких полум'я, а разом з ним і світ – гаснуть, а темрява стає сильнішою.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory7"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -249,7 +271,7 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Де мені шукати їх?";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString5");
                     ButtonAnswerThree.Content = "...";
                 }
             }
@@ -258,9 +280,9 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
 
-                if (answerText == "Що мені потрібно робити?")
+                if (answerText == (string)Application.Current.FindResource("btnString4"))
                 {
-                    ChangeFrame("-Тобі потрібно знайти володарів, та знищити великі темні души, щоб відновити рівновагу у світі та повернути пітьму на своє місце. Ось тобі променевий компас вилкого полум'я. Він проведе тебе до володарів.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory8"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -268,12 +290,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Дякую.";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString6");
                     ButtonAnswerThree.Content = "...";
                 }
-                else if (answerText == "Де мені шукати їх?")
+                else if (answerText == (string)Application.Current.FindResource("btnString5"))
                 {
-                    ChangeFrame("-Ось тобі променевий компас вилкого полум'я. Він проведе тебе до володарів. Я дуже тебе прошу, знищи ці души.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory9"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -281,12 +303,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Дякую.";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString6");
                     ButtonAnswerThree.Content = "...";
                 }
                 else
                 {
-                    ChangeFrame("-Тобі потрібно знайти володарів, та знищити великі темні души, щоб відновити рівновагу у світі та повернути пітьму на своє місце. Ось тобі променевий компас вилкого полум'я. Він проведе тебе до володарів.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory8"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -294,7 +316,7 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "Дякую.";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString6");
                     ButtonAnswerThree.Content = "...";
                 }
             }
@@ -305,7 +327,7 @@ namespace WPFNovella
 
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("-Будь ласка, візьми цей оберіг. Він допоможе тобі у битві проти володарів.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory10"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -313,12 +335,12 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "*Взяти оберіг* [Easy mode]";
-                    ButtonAnswerThree.Content = "*Відмовитись* [Hard mode]";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString7");
+                    ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString8");
                 }          
                 else
                 {
-                    ChangeFrame("-Візьми цей оберіг. Він допоможе тобі у битві проти володарів.");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory11"));
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -326,13 +348,13 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "*Взяти оберіг* [Easy mode]";
-                    ButtonAnswerThree.Content = "... [Hard mode]";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString7");
+                    ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString8");
                 }
             }
             else if (counter == 26)
             {
-                ChangeFrame("*Незгаслий відчув сильне бажання допомогти, і зважився вирушити в небезпечну подорож, щоб зруйнувати владу трьох володарів, які утримували великі душі, необхідні для миру.*", "1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory12"), "1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg");
 
                 ArrowBorder.Visibility = Visibility.Visible;
 
@@ -352,32 +374,32 @@ namespace WPFNovella
             }
             else if (counter == 27)
             {
-                ChangeFrame("*Променевий компас засвітився і почав вказувати дорогу, ви вирішили йти слідом.*", "compas.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory13"), "compas.jpg");
                 counter++;
             }
             else if (counter == 28)
             {
-                ChangeFrame("*Незгаслий йшов за променем, до першого володаря Ніто, к Першому із Мертвих*", "priroda.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory14"), "priroda.jpg");
                 counter++;
             }
             else if (counter == 29)
             {
-                ChangeFrame("*Після деякого часу, незгаслий прийшов до входу у величезні катакомби, притулок Ніто*", "katokombi.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory15"), "katokombi.jpg");
                 counter++;
             }
             else if (counter == 30)
             {
-                ChangeFrame("*Незгаслий зайшов усередину і почав спускатися в надр катакомби*");       
+                ChangeFrame((string)Application.Current.FindResource("mainStory16"));       
                 counter++;
             }
             else if (counter == 31)
             {
-                ChangeFrame("*Через деякий час. Ви почули сзаду шум. Незгаслий почав акуратно повертатися у бік звуку*", "nedryKatak.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory17"), "nedryKatak.jpg");
                 counter++;
             }
             else if (counter == 32)
             {
-                ChangeFrame("*Повернувшись Незгаслий завмер.. позаду нього був Ніто, який пильно дивився на незгаслого*", "nitoNear.jpg");            
+                ChangeFrame((string)Application.Current.FindResource("mainStory18"), "nitoNear.jpg");            
                 PlaybackMusic("Resources\\1-07 Curse-Rotted Greatwood.mp3");
                 counter++;
             }
@@ -394,10 +416,9 @@ namespace WPFNovella
                 await Task.Delay(1500);
                 FadeButton();
                 
-                ButtonAnswerTwo.Content = "Бійся мене. Я твоя смерть. [Напасти]";
-                ButtonAnswerThree.Content = "*Напасти на Ніто*";
-
-               
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString9");
+                ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString10");
+         
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
 
@@ -407,16 +428,16 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
 
-                ChangeFrame("*Різко діставши меч, Незгаслий, побіг у бік Ніто, після чого спробував зробити удар*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory18"));
                 await Task.Delay(5000);
 
-                ChangeFrame("*Продзвенів звук металу по всіх тунелях катакомб*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory19"));
                 await Task.Delay(5000);
 
-                ChangeFrame("*Меч Незгаслий та Ніто схерстились у танці бою*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory20"));
                 await Task.Delay(5000);
 
-                ChangeFrame("*Незгаслий спробував нанести ще один удар*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory21"));
                 await Task.Delay(5000);
 
                 if (isHardMode)
@@ -424,16 +445,16 @@ namespace WPFNovella
                     Random random = new Random();
                     if (random.Next(1, 101) <= 15)
                     {
-                        ChangeFrame("*Ніто вбив вас*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory22"));
                         StoryOfTheDeceased();
                         return;
                     }
                 }
 
-                ChangeFrame("*Незгаслий зробив вдачиний випад мечем, та пробив наскрізь тіло Ніто*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory23"));
                 await Task.Delay(5000);
 
-                ChangeFrame("*Після цього Ніто впав замертво, а ви отримали першу темну душу. Що ви будете з нею робити?*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory24"));
                 await Task.Delay(5000);
 
                 FadeButton();
@@ -441,8 +462,8 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                ButtonAnswerTwo.Content = "Знищити [Після знищення усіх трьох темних душ, ви врятуєте світ від тьми]";
-                ButtonAnswerThree.Content = "Поглинути [Після поглиннаня усіх трьох темних душ, ви станете Богом]";
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString11");
+                ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString12");
                 
             }
             else if (counter == 35)
@@ -457,46 +478,46 @@ namespace WPFNovella
 
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("*Після знищення ти відчув, як світ став краще, а тьма стала слабіше*", "nitoDead.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory25"), "nitoDead.jpg");
                     counterSoulsWhichHeroSave++;
                     counter++;
                 }
                 else
                 {
-                    ChangeFrame("*Незгаслий поглинув душу, та став сильніше*", "nitoDead.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory26"), "nitoDead.jpg");
                     counterSoulsInHero++;
                     counter++;
                 }
             }
             else if (counter == 36)
             {
-                ChangeFrame("*Після чого Незгаслий пішов к другому володарю*", "pustoshi.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory27"), "pustoshi.jpg");
                 PlaybackMusic("Resources\\1-18 Oceiros, The Consumed King.mp3");
                 counter++;
             }
             else if (counter == 37)
             {
-                ChangeFrame("*Через деякій час, Незгаслий дійшов до замку Ізаліти, другої володорки темних душ*", "castleCharodeiki.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory28"), "castleCharodeiki.jpg");
                 counter++;
             }
             else if (counter == 38)
             {
-                ChangeFrame("*Пройшовши через ворота замка. Незгаслий побачив вдалині Ізаліту*", "IzalitaNear.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory29"), "IzalitaNear.jpg");
                 counter++;
             }
             else if (counter == 39)
             {
-                ChangeFrame("*Голос Ізаліти* - Стій там. Або мені прийдеться вбити тебе!");
+                ChangeFrame((string)Application.Current.FindResource("mainStory30"));
                 counter++;
             }
             else if (counter == 40)
             {
-                ChangeFrame("-Ти прийшов до мене, щоб померти?", "izolitaFace.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory31"), "izolitaFace.jpg");
                 counter++;
             }
             else if (counter == 41)
             {
-                ChangeFrame("-Якщо ти підеш, я не переслідуватиму тебе. Але якщо ти залишишся, я буду змушена знищити тебе.");
+                ChangeFrame((string)Application.Current.FindResource("mainStory32"));
 
                 ArrowBorder.Visibility = Visibility.Collapsed;
 
@@ -506,7 +527,7 @@ namespace WPFNovella
                 await Task.Delay(1500);
                 FadeButton();
 
-                ButtonAnswerTwo.Content = "Я не збираюся йти. Я прийшов, щоб повернути темні душі.";
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString13");
                 ButtonAnswerThree.Content = "...";
 
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
@@ -519,7 +540,7 @@ namespace WPFNovella
 
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("-Ти ідіот, в тебе не вийде це, ПОМРИ КОМАХА! *Ізаліта починає чаклувати вогнянну кулю*", "izalitaAttack.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory33"), "izalitaAttack.jpg");
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -528,12 +549,12 @@ namespace WPFNovella
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
 
-                    ButtonAnswerTwo.Content = "[Побігти в атаку]";
-                    ButtonAnswerThree.Content = "[Спробувати ухилитися]";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString14");
+                    ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString15");
                 }
                 else
                 {
-                    ChangeFrame("-Ти не дуже балакучий, що ж, ПОМРИ! *Ізаліта починає чаклувати вогнянну кулю*", "izalitaAttack.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory34"), "izalitaAttack.jpg");
                     await Task.Delay(2000);
 
                     FadeButton();
@@ -541,8 +562,8 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = "[Побігти в атаку]";
-                    ButtonAnswerThree.Content = "[Спробувати ухилитися]";
+                    ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString14");
+                    ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString15");
                 }
             }
             else if (counter == 43)
@@ -554,9 +575,9 @@ namespace WPFNovella
                 if (answerText == ButtonAnswerTwo.Content)
                 {
                     await Task.Delay(1000);
-                    ChangeFrame("*Ви з мечем почали бігти на Ізаліту*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory35"));
                     await Task.Delay(5000);
-                    ChangeFrame("*У бік вас летить вогнянна куля*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory36"));
                     await Task.Delay(5000);    
                    
                     if (isHardMode)
@@ -564,7 +585,7 @@ namespace WPFNovella
                         if (random.Next(1, 101) <= 20)
                         {
                             FadeText();
-                            InfoTextBox.Text = "*Ізаліта вбила вас*";
+                            InfoTextBox.Text = (string)Application.Current.FindResource("mainStory37");
                             await Task.Delay(6000);
                             StoryOfTheDeceased();
                             return;
@@ -573,10 +594,10 @@ namespace WPFNovella
 
                     if (random.Next(1, 101) <= 90)
                     {
-                        ChangeFrame("*Ви ухіляетесь від вогнянної кулі, після чого наносите удар*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory38"));
                         await Task.Delay(7000);
 
-                        ChangeFrame("*Ваш меч пройшов через плече, розрізавши Ізаліту до живота. Після чого ви отримали другу темну душу. Що ви будете робити з нею?*", "charodeikaDead.jpg");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory39"), "charodeikaDead.jpg");
                         await Task.Delay(5000);
 
                         FadeButton();
@@ -584,12 +605,12 @@ namespace WPFNovella
                         ButtonAnswerTwo.Visibility = Visibility.Visible;
                         ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                        ButtonAnswerTwo.Content = $"Знищити [{counterSoulsWhichHeroSave}/3]";
-                        ButtonAnswerThree.Content = $"Поглинути [{counterSoulsInHero}/3]";
+                        ButtonAnswerTwo.Content = $"{(string)Application.Current.FindResource("mainStory40")} [{counterSoulsWhichHeroSave}/3]";
+                        ButtonAnswerThree.Content = $"{(string)Application.Current.FindResource("mainStory41")} [{counterSoulsInHero}/3]";
                     }
                     else
                     {
-                        ChangeFrame("*Ізаліта вбила вас*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory37"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
@@ -597,30 +618,30 @@ namespace WPFNovella
                 }
                 else
                 {
-                    ChangeFrame("*Ви почали акуратно йти на Ізаліту ухиляючись від її атак*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory42"));
                     await Task.Delay(6000);
-                    ChangeFrame("*Після того як ви підійшли до Ізаліти, ви почали наности удари*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory43"));
                     await Task.Delay(6000);
-                    ChangeFrame("*Ізаліта завдяки магії відбивала ваші удари*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory44"));
                     await Task.Delay(6000);
-                    ChangeFrame("*Вона спробувала спалити вас вогнем*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory45"));
                     await Task.Delay(6000);
 
                     if (isHardMode)
                     {
                         if (random.Next(1, 101) <= 10)
                         {
-                            ChangeFrame("*Ізаліта вбила вас*");
+                            ChangeFrame((string)Application.Current.FindResource("mainStory37"));
                             await Task.Delay(6000);
                             StoryOfTheDeceased();
                             return;
                         }                           
                     }
 
-                    ChangeFrame("*Ви ухиляєтесь від її магії*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory46"));
                     await Task.Delay(6000);
 
-                    ChangeFrame("*Ваш меч пройшов через плече, розрізавши Ізаліту до живота. Після чого ви отримали другу темну душу. Що ви будете робити з нею?*", "charodeikaDead.jpg");                
+                    ChangeFrame((string)Application.Current.FindResource("mainStory39"), "charodeikaDead.jpg");                
                     await Task.Delay(5000);
 
                     FadeButton();
@@ -628,8 +649,8 @@ namespace WPFNovella
                     ButtonAnswerTwo.Visibility = Visibility.Visible;
                     ButtonAnswerThree.Visibility = Visibility.Visible;
 
-                    ButtonAnswerTwo.Content = $"Знищити [{counterSoulsWhichHeroSave}/3]";
-                    ButtonAnswerThree.Content = $"Поглинути [{counterSoulsInHero}/3]" ;
+                    ButtonAnswerTwo.Content = $"{(string)Application.Current.FindResource("mainStory40")} [{counterSoulsWhichHeroSave}/3]";
+                    ButtonAnswerThree.Content = $"{(string)Application.Current.FindResource("mainStory41")} [{counterSoulsInHero}/3]";
                 }
             }
             else if (counter == 44)
@@ -644,20 +665,20 @@ namespace WPFNovella
 
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("*Після знищення ти відчув, як світ став краще, а тьма стала слабіше*", "afterDeadIzolita.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory25"), "afterDeadIzolita.jpg");
                     counterSoulsWhichHeroSave++;
                     counter++;
                 }
                 else
                 {
-                    ChangeFrame("*Незгаслий поглинув душу, та став сильніше*", "afterDeadIzolita.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory26"), "afterDeadIzolita.jpg");
                     counterSoulsInHero++;
                     counter++;
                 }
             }
             else if (counter == 45)
             {
-                ChangeFrame("*Незгаслий пішов до останнього володаря. Промінь з компаса показував на храм, який знаходився за горами*", "mountains.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory47"), "mountains.jpg");
                 PlaybackMusic("Resources\\1-04 Iudex Gundyr.mp3");
                 counter++;
             }
@@ -670,42 +691,41 @@ namespace WPFNovella
                 FooterBorder.IsEnabled = false;
                 ArrowBorder.IsEnabled = false;
 
-                ChangeFrame("*Незгаслий підійшов до храму, як раптом..*", "hram.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory48"), "hram.jpg");
                 await Task.Delay(8000);
 
-                ChangeFrame("*З неба в вас летить блискавка...*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory49"));
                 await Task.Delay(8000);
 
                 if (isHardMode)
                 {
                     if (random.Next(1, 101) <= 5)
                     {
-                        ChangeFrame("*Гвін вбив вас*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
                     }
                 }
 
-                ChangeFrame("*Ви ухиляєтесь від неї, але одразу летить ще одна...*", "stormPunch.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory51"), "stormPunch.jpg");
                 await Task.Delay(8000);
                         
                 if(isHardMode)
                 {
                     if (random.Next(1, 101) <= 10)
                     {
-                        FadeText();
-                        InfoTextBox.Text = "*Гвін вбив вас*";
+                        ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
                     }
                 }
 
-                ChangeFrame("*Ви змогли ухилитись ще раз, як раптом ви бачите, що з Храму виходить останній володарь душі, Гвін, король Світу*", "GvinNear.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory52"), "GvinNear.jpg");
                 await Task.Delay(8000);
 
-                ChangeFrame("*Голос Гвіна* - Ти зайшов дуже далеко.");
+                ChangeFrame((string)Application.Current.FindResource("mainStory53"));
 
                 ArrowBorder.Visibility = Visibility.Visible;
 
@@ -716,12 +736,12 @@ namespace WPFNovella
             }
             else if (counter == 47)
             {
-                ChangeFrame("-Твоя мета безглузда. Ніхто не може мене зупинити. Ти помреш!");             
+                ChangeFrame((string)Application.Current.FindResource("mainStory54"));             
                 counter++;
             }
             else if (counter == 48)
             {
-                ChangeFrame("-Ти не зможеш перемогти мене, *говорив він, атакуючи Незгаслого.* Я - володарь пітьми, і моя сила безмежна!", "gvinAttack.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory55"), "gvinAttack.jpg");
                 counter++;
             }
             else if (counter == 49)
@@ -730,32 +750,29 @@ namespace WPFNovella
 
                 FooterBorder.IsEnabled = false;
                 ArrowBorder.IsEnabled = false;
-
-                Random random = new Random();
-
-                ChangeFrame("-ТИ ПОМРЕШ. І БІЛЬШЕ НІКТО НЕ ЗМОЖЕ ПЕРЕМОГТИ МЕНЕ. *Гвін кинув у Незгаслого ще одну блискавку*");
+    
+                ChangeFrame((string)Application.Current.FindResource("mainStory56"));
                 await Task.Delay(8000);
 
                 if (isHardMode)
                 {
                     if (random.Next(1, 101) <= 5)
                     {
-                        FadeText();
-                        InfoTextBox.Text = "*Гвін вбив вас*";
+                        ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
                     }
                 }
-                ChangeFrame("*Ви змогли ухилитись*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory57"));
                 await Task.Delay(7000);
-                ChangeFrame("*Незгаслий розумів, що йому треба щось вигадати, щоб перемогти*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory58"));
                 await Task.Delay(4000);
 
                 FadeButton();
 
-                ButtonAnswerTwo.Content = "[Обійти Гвіна і завдати йому удару]";
-                ButtonAnswerThree.Content = "Ти жалюгідний. [Зробити атаку спереду]";
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString16");
+                ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString17");
 
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
@@ -765,74 +782,72 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
 
-                Random random = new Random();
                 if (answerText == ButtonAnswerTwo.Content)
                 {
-                    ChangeFrame("*Ви з мечем почали оббігати Гвіна, щоб ударити його*", "knightAttack.jpg");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory59"), "knightAttack.jpg");
                     await Task.Delay(5000);
-                    ChangeFrame("*Замахнувшись ви наносите удар та...*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory60"));
                     await Task.Delay(5000);
-                    ChangeFrame("*Ви успішно наносите йому удар*");
+                    ChangeFrame((string)Application.Current.FindResource("mainStory61"));
                     await Task.Delay(5000);                 
                 }
                 else
                 {
                     if (random.Next(1, 101) > 10)
                     {
-                        ChangeFrame("*Незгаслий ухилився від блискавки і зібрався атакувати Гвіна, незважаючи на його погрози*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory62"));
                         await Task.Delay(7000);
-                        ChangeFrame("*Гвін продовжує кидати блискавки у незгаслого* ПОМРИ!");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory63"));
                         await Task.Delay(7000);
 
                         if (isHardMode)
                         {
                             if (random.Next(1, 101) <= 30)
                             {
-                                FadeText();
-                                InfoTextBox.Text = "*Гвін вбив вас*";
+                                ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                                 await Task.Delay(6000);
                                 StoryOfTheDeceased();
                                 return;
                             }
                         }
 
-                        ChangeFrame("*Ви наблизилися до Гвіна і завдаєте сильного удару*", "knightAttack.jpg");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory64"), "knightAttack.jpg");
                         await Task.Delay(7000);
                     }
                     else
                     {
-                        ChangeFrame("*Гвін вбив вас*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
                     }
                 }
 
-                ChangeFrame("*Ви поранили Гвіна* -Ти... Я такого ще не бачив. Ти справді впевнений у своїх силах? Ти думаєш, що можеш змінити перебіг долі цього світу?", "angryGvin.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory65"), "angryGvin.jpg");
                 await Task.Delay(9000);
-                ChangeFrame("-Ти помиляєшься.. Цей світ нічого не змінить. Він вже мертвий. ПОМРИ *Гвін наносить удар*");
+                ChangeFrame((string)Application.Current.FindResource("mainStory66"));
                 await Task.Delay(8000);
 
                 if (isHardMode)
                 {
                     if (random.Next(1, 101) <= 10)
                     {
-                        ChangeFrame("*Гвін вбив вас*");
+                        ChangeFrame((string)Application.Current.FindResource("mainStory50"));
                         await Task.Delay(6000);
                         StoryOfTheDeceased();
                         return;
                     }
                 }
 
-                ChangeFrame("*Ви ухиляєтесь. Після чого наносете ще один удар по Гвіну*", "knightAttack.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory67"), "knightAttack.jpg");
                 await Task.Delay(8000);
-                ChangeFrame("*Гвін падає на коліна. Після чого він віддає останню велику душу тобі. Що ти будеш з нею робити?*", "deadGvin.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory68"), "deadGvin.jpg");
                 await Task.Delay(4000);
 
                 FadeButton();
 
-                ButtonAnswerTwo.Content = $"Знищити [{counterSoulsWhichHeroSave}/3]";
-                ButtonAnswerThree.Content = $"Поглинути [{counterSoulsInHero}/3]" ;
+                ButtonAnswerTwo.Content = $"{(string)Application.Current.FindResource("mainStory40")} [{counterSoulsWhichHeroSave}/3]";
+                ButtonAnswerThree.Content = $"{(string)Application.Current.FindResource("mainStory41")} [{counterSoulsInHero}/3]";
 
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
@@ -840,7 +855,7 @@ namespace WPFNovella
 
             else if (counter == 51)
             {
-                ChangeFrame("*Стоявши серед поля битви, ти побачив як к тобі йде Емілія*", "heroEnd.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory69"), "heroEnd.jpg");
 
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -867,52 +882,51 @@ namespace WPFNovella
         async void GoodEndStory()
         {
             PlaybackMusic("Resources\\1-25 Epilogue.mp3");
-            ChangeFrame("-Ти вбив усіх володарів. Я.. Я дуже дякую тобі, за те що ти врятував наш світ.. Але..", "hranitelnicaSay.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd0"), "hranitelnicaSay.jpg");
             await Task.Delay(12000);
-            ChangeFrame("-В тобі 4 темна душа.. яку ти успадкував від Пігмея.. І треба також її віддати великому полум'ю..");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd1"));
             await Task.Delay(12000);
-            ChangeFrame("*Незгаслий важко зітхнув*");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd2"));
             await Task.Delay(12000);
-            ChangeFrame("-Не бійся.. Велике полум'я поглине тебе.. І ти здобудеш спокій, Втрачена душа.");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd3"));
             await Task.Delay(12000);
-            ChangeFrame("*Незгаслий повернувся щоб все обміркувати*");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd4"));
             await Task.Delay(12000);
-            ChangeFrame("-Прошу.. Не бійся.. я допоможу тобі.. *підійшовши ззаду к Незгаслому, та обійняла його*", "92361-games-arts-the-keeper-of-fire-fire-keeper-dark.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd5"), "92361-games-arts-the-keeper-of-fire-fire-keeper-dark.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Незгаслий повернувся до хранительки вогню, після чого кивнув їй*", "5227654.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd6"), "5227654.jpg");
             await Task.Delay(12000);
-            ChangeFrame("-Дякую тобі.. Прощавай..");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd7"));
             await Task.Delay(12000);
-            ChangeFrame("*Доторкнувшись к Незгаслому. Вона звільнила його душу*");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd8"));
             await Task.Delay(12000);
-            ChangeFrame("*Процес був не найприємнішим*", "photo_2023-05-03_18-31-50.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd9"), "photo_2023-05-03_18-31-50.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Після того як хранителька вогню повернула всі душі великому вогню.. У світ повернувся баланс..*", "flowers.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyGoodEnd10"), "flowers.jpg");
             await Task.Delay(12000);
 
             FooterBorder.Visibility = Visibility.Collapsed;
-            FadeText();
             TheEndLabel.Visibility = Visibility.Visible;
         }
 
         async void DarkEndStory()
         {
             PlaybackMusic("Resources\\2-10 Sister Friede and Father Ariandel.mp3");
-            ChangeFrame("-Я бачу.. що тебе поглинула тьма..", "1495318152_ev1ct_fire-keeper.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd0"), "1495318152_ev1ct_fire-keeper.jpg");
             await Task.Delay(12000);
-            ChangeFrame("-Нащо ти зробив це.. Тепер наш світ помре.. А велике полум'я погасне.");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd1"));
             await Task.Delay(12000);
-            ChangeFrame("*Незгаслий каже* -Тепер я володар цього світу.", "697790.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd2"), "697790.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Емілія* -Я не дозволю тобі.. ", "1495318152_ev1ct_fire-keeper.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd3"), "1495318152_ev1ct_fire-keeper.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Незгаслий дістав меч, після чого замахнувся і швидким ударом вбив Емілію*", "f75d3239266dbfab17a9c17ffb4a270a.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd4"), "f75d3239266dbfab17a9c17ffb4a270a.jpg");
             await Task.Delay(12000);
-            ChangeFrame("-Тепер велике полум'я всередині мене.");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd5"));
             await Task.Delay(12000);
-            ChangeFrame("-Тепер я. Король цього світу.");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd6"));
             await Task.Delay(12000);
-            ChangeFrame("-І ніхто не завадить мені..", "c123c6c3f80b0668b8b7a46cdbb28722.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyDarkEnd7"), "c123c6c3f80b0668b8b7a46cdbb28722.jpg");
             await Task.Delay(12000);
 
 
@@ -931,13 +945,13 @@ namespace WPFNovella
             ChangeFrame("");
             await Task.Delay(3000);
             PlaybackMusic("Resources\\2-07 Unused Track 6.mp3");
-            ChangeFrame("*Після того як Незгаслий помер. Світ почала поглинати тьма*", "dark-souls-ii-humanity-knight.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyOfTheDeceased0"), "dark-souls-ii-humanity-knight.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Світ поринув у морок і хаос, і люди не могли знайти спосіб повернути рівновагу.*", "nws_dark_souls3_001.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyOfTheDeceased1"), "nws_dark_souls3_001.jpg");
             await Task.Delay(12000);
-            ChangeFrame("*Однак не всі надії було втрачено*");
+            ChangeFrame((string)Application.Current.FindResource("storyOfTheDeceased2"));
             await Task.Delay(12000);
-            ChangeFrame("*Існувала легенда про те, що у світі існують ще незгаслі, які відновлять рівновагу у світі.*", "warriors.jpg");
+            ChangeFrame((string)Application.Current.FindResource("storyOfTheDeceased3"), "warriors.jpg");
             await Task.Delay(12000);
             ChangeFrame("", "theEnd.jpg");
 
@@ -953,79 +967,86 @@ namespace WPFNovella
                 FadeImage();
                 GameImage.Source = new BitmapImage(new Uri($"Resources\\{imageName}", UriKind.Relative));
             }
-            InfoTextBox.Text = text;
+            InfoTextBox.Text = "";
+            foreach(char c in text)
+            {
+                InfoTextBox.Text += c;
+                Task.Delay(20);
+            }
         }
 
         void StartStory()
         {
-            counter++;
+       
+            counter++;        
+
             if (counter == 1)
             {
-                ChangeFrame("-Їхні могутні тіла покривала дивовижна луска, завдяки якій вони жили вічно і були невразливими. Також дракони мали могутній артефакт – Початковий кристал, який міг зберігати життя. Так цей темний світ існував невідомий час, і його назвали Епохою Стародавніх.", "fotor-ai-202305030380.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory1"), "fotor-ai-202305030380.jpg");
             }
             else if (counter == 2)
             {
-                ChangeFrame("-Але потім з'явилося Полум'я. Полум'я несло у собі чотири Великі Душі. Саме вони стали джерелом конфлікту. Невідомо, звідки прийшли майбутні володарі Душ. В Епоху Стародавніх не існувало чаклунства, яким ми його знаємо, а світ був єдиний.", "greaterFlame.jpg");         
+                ChangeFrame((string)Application.Current.FindResource("startStory2"), "greaterFlame.jpg");         
             }
             else if (counter == 3)
             {
-                ChangeFrame("-У темряві та тумані існували пригнічені жорстокими володарями істоти різної природи. Вони виживали в суворих умовах, без світла та надії, поки в надрах землі не виникло Полум'я. Можливо, саме воно і закликало нові форми життя з небуття, розділивши все, що існує на жар і холод, життя і смерть, світло і пітьму.", "animalsFear.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory3"), "animalsFear.jpg");
             }
             else if (counter == 4)
             {
-                ChangeFrame("-Дехто каже, що дракони не були живими власними силами. Адже життя було слабкістю, яке їм не властиве. Дракони були тією частиною природи, що існує поза життям і смертю.", "fotor-ai-2023050311139.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory4"), "fotor-ai-2023050311139.jpg");
             }
             else if (counter == 5)
             {
-                ChangeFrame("-Такий порядок речей зберігався до появи вогню, разом із яким прийшли Світло та Темрява. З Темряви з'явилися Вони, що знайшли в першому полум'ї душі Лордів: Перше полум'я - це вогонь, що дарує життя та світло.", "firstLight.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory5"), "firstLight.jpg");
             }
             else if (counter == 6)
             {
-                ChangeFrame("-Велетні, що вийшли з нього, підкорялися драконам доти, доки чотири гіганти не знайшли в полум'ї 4 великі душі, що перетворили їх на Богів.", "gigants.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory6"), "gigants.jpg");
             }
             else if (counter == 7)
             {
-                ChangeFrame("-На першу Душу заявив свої права Ніто, Перший із Мертвих. На зорі Ери Вогню він отримав одну з Великих Душ, після чого став керувати смертями всіх живих істот. У війні проти Драконів Ніто насилав міазми хвороб і смерті на своїх ворогів.", "nito.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory7"), "nito.jpg");
             }
             else if (counter == 8)
             {
-                ChangeFrame("-Інша Душа належала Відьмі Ізаліта, могутній чарівниці. Відьма та її дочки були справжніми майстрами магії вогню.", "charodeika.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory8"), "charodeika.jpg");
             }
             else if (counter == 9)
             {
-                ChangeFrame("-Третю Душу взяв Гвін, Король Світу. Потужність Полум'я зробила його богом і наділила неймовірними силами. У той час Гвін був відомий як Король Сонячного Світу. У битвах він використовував дива, подібні до Списа блискавки.", "povelitelLight.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory9"), "povelitelLight.jpg");
             }
             else if (counter == 10)
             {
-                ChangeFrame("-Остання Душа була особливою. Вона називалася Темною і потрапила до рук безіменного карлика, який став прабатьком усього людства. Вона була невеликою та непомітною, як і її господар. Може здатися, що цьому слабкому карлику дісталися залишки бенкету володарів, жалюгідні крихти.", "blackSoul.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory10"), "blackSoul.jpg");
             }
             else if (counter == 11)
             {
-                ChangeFrame("-Але саме ця Душа виявиться сильнішою за інші і стане загрозою всьому світу. Поки володарі збирали сили, щоб розпочати війну, безіменний Пігмей зміг піти непоміченим та загубитися на довгі роки. Довгий час ніхто не підозрював про роль, яку йому судилося зіграти у протистоянні світла та темряви.", "siluet.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory11"), "siluet.jpg");
             }
             else if (counter == 12)
             {
-                ChangeFrame("-Саме від нього походять люди - він розподілив свої жалюгідні крихти між усіма неживими, причому кожна людина успадкувала частинку його душі. Уламки Темної Душі стали відомі як людяність.", "pigmeygnom.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory12"), "pigmeygnom.jpg");
             }
             else if (counter == 13)
             {
-                ChangeFrame("-Але згодом володарі трьох душ почали слабшати, що полум'я подарувало їм силу, почало гаснути. Хтось мав віддати свою душу полум'ю, щоб знову стати Богами. Дізнавшись із пророцтва, що великих темних душ було чотири, всі три володаря підняли все своє військо на пошуки четвертої душі.", "army.jpg");          
+                ChangeFrame((string)Application.Current.FindResource("startStory13"), "army.jpg");          
             }
             else if (counter == 14)
             {
-                ChangeFrame("-Гвін відправив своїх вірних лицарів на пошуки Темної Душі, вбиваючи всіх, хто міг її мати. Ніто скористався своєю владою над смертю, щоби створити армію нежиті, яка шукала четверту душу. Ізаліта, використовуючи свою магію, породжувала вогняних істот.", "army2.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory14"), "army2.jpg");
             }
             else if (counter == 15)
             {
-                ChangeFrame("-Всі вони хотіли знайти і знищити того, хто має четверту душу. Після довгих років пошуку, вони нарешті дізналися, що четверта душа знаходиться у Пігмея, і вирішили спробувати її відібрати, вбивши його. Після того, як володарі відібрали у Пігмея четверту душу, вона розлетілася на уламки.", "crystall.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory15"), "crystall.jpg");
             }
             else if (counter == 16)
             {
-                ChangeFrame("-Деякі частини вдалося отримати володарям, але інші уламки породили незгаслих - людей з темними душами всередині. Вони були ув'язнені в склепах на багато мільйонів років, але після того, як володарі вкрали душу Пігмея, вони прокинулися і почали свій шлях світом.", "nepogashiy.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory16"), "nepogashiy.jpg");
             }
             else if (counter == 17)
             {
-                ChangeFrame("-Ці люди, що мають темну душу, стали відомі як Незгаслі.", "hero.jpg");
+                ChangeFrame((string)Application.Current.FindResource("startStory17"), "hero.jpg");
             }
         }
 
