@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="fotor-ai-20230502223742.jpg" />
+    <None Remove="free-icon-suicidal-7081354.png" />
     <None Remove="Resources\1-04 Iudex Gundyr.mp3" />
     <None Remove="Resources\1-05 Firelink Shrine.mp3" />
     <None Remove="Resources\1-07 Curse-Rotted Greatwood.mp3" />
@@ -43,6 +44,8 @@
     <None Remove="Resources\flowers.jpg" />
     <None Remove="Resources\fotor-ai-202305030380.jpg" />
     <None Remove="Resources\fotor-ai-2023050311139.jpg" />
+    <None Remove="Resources\free-icon-knight-5510685.png" />
+    <None Remove="Resources\free-icon-suicidal-7081354.png" />
     <None Remove="Resources\gigants.jpg" />
     <None Remove="Resources\greaterFlame.jpg" />
     <None Remove="Resources\gvinAttack.jpg" />
@@ -109,6 +112,7 @@
     <EmbeddedResource Include="Resources\button-8-88355.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="free-icon-suicidal-7081354.png" />
     <Resource Include="Resources\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -152,6 +156,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\flowers.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\free-icon-knight-5510685.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\free-icon-suicidal-7081354.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\gvinAttack.jpg">

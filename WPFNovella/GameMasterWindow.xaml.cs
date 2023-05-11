@@ -148,11 +148,10 @@ namespace WPFNovella
         }
 
         bool isHardMode;
-        Random random = new Random();
-
-        
+        Random random = new Random();   
         int counterSoulsInHero = 0;
         int counterSoulsWhichHeroSave = 0;
+
         async void MainStory()
         {
             if (counter == 18)
@@ -440,15 +439,19 @@ namespace WPFNovella
                 ChangeFrame((string)Application.Current.FindResource("mainStory21"));
                 await Task.Delay(5000);
 
-                if (isHardMode)
+                //Hide();
+                MiniGameVersusNito miniGameVersusNito = new MiniGameVersusNito();
+                miniGameVersusNito.Owner = this;
+                miniGameVersusNito.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                miniGameVersusNito.isHardMode = isHardMode;
+                if (miniGameVersusNito.ShowDialog() == true)
                 {
-                    Random random = new Random();
-                    if (random.Next(1, 101) <= 15)
-                    {
-                        ChangeFrame((string)Application.Current.FindResource("mainStory22"));
-                        StoryOfTheDeceased();
-                        return;
-                    }
+                    //Show();
+                }
+                else
+                {
+                    StoryOfTheDeceased();
+                    return;
                 }
 
                 ChangeFrame((string)Application.Current.FindResource("mainStory23"));
@@ -571,7 +574,6 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
 
-                Random random = new Random();
                 if (answerText == ButtonAnswerTwo.Content)
                 {
                     await Task.Delay(1000);
@@ -683,9 +685,7 @@ namespace WPFNovella
                 counter++;
             }
             else if (counter == 46)
-            {
-                Random random = new Random();
-            
+            {           
                 ArrowBorder.Visibility = Visibility.Collapsed;
 
                 FooterBorder.IsEnabled = false;
@@ -937,13 +937,10 @@ namespace WPFNovella
 
         async void StoryOfTheDeceased()
         {
-            await Task.Delay(6000);
             FooterBorder.IsEnabled = false;
             ArrowBorder.IsEnabled = false;
             ArrowBorder.Visibility = Visibility.Collapsed;
-
-            ChangeFrame("");
-            await Task.Delay(3000);
+            ChangeFrame("");         
             PlaybackMusic("Resources\\2-07 Unused Track 6.mp3");
             ChangeFrame((string)Application.Current.FindResource("storyOfTheDeceased0"), "dark-souls-ii-humanity-knight.jpg");
             await Task.Delay(12000);

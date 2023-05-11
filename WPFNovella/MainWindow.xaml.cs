@@ -42,6 +42,7 @@ namespace WPFNovella
             if (mediaMainTheme != null)
             {
                 mediaMainTheme.Open(new Uri("Resources\\1-02 Prologue.mp3", UriKind.Relative));
+                mediaMainTheme.Volume = gameProp.PropMusicVolume;
                 mediaMainTheme.MediaEnded += new EventHandler(Media_Ended);
                 mediaMainTheme.Play();
 
@@ -65,7 +66,7 @@ namespace WPFNovella
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
             mediaButton.Open(new Uri("Resources\\button-8-88355.mp3", UriKind.Relative));
-            mediaButton.Volume = 0.02;
+            mediaButton.Volume = 0.01;
             mediaButton.Play();
             Border border = (Border)sender;
             border.BorderBrush = Brushes.DarkOrange;
@@ -87,10 +88,10 @@ namespace WPFNovella
             gameMasterWindow.Owner = this;
             gameMasterWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
+
             if (gameMasterWindow.ShowDialog() == true)
             {
-                //this.Show();
-                MessageBox.Show("Test");
+                Show();
             }
             else
             {

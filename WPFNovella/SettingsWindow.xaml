@@ -379,9 +379,9 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Vertical">
             <Label x:Name="VolumaMusicLabel" Content="Гучність музики:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFDCB83B" FontSize="34" FontFamily="Sitka Banner Semibold" Margin="15,10,0,0"/>
-            <Slider x:Name="MusicSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="100"/>
+            <Slider x:Name="MusicSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="50"/>
             <Label x:Name="VolumeVoiceLabel" Content="Гучність голоса:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFDCB83B" FontSize="34" FontFamily="Sitka Banner Semibold" Margin="15,30,0,0"/>
-            <Slider x:Name="VoiceSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="100"/>
+            <Slider x:Name="VoiceSlider" Minimum="0" Maximum="100" Width="305" HorizontalAlignment="Left" Height="31" Margin="15,10,0,0" IsSnapToTickEnabled="True" Style="{StaticResource CustomSliderStyle}" Value="50"/>
         </StackPanel>
         
         <StackPanel Grid.ColumnSpan="2">

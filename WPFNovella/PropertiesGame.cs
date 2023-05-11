@@ -9,8 +9,8 @@ namespace WPFNovella
     public class PropertiesGame
     {
         public string PropLanguage { get; set; } = "Ukrainian (UA)";
-        public float PropMusicVolume { get; set; } = 1;
-        public float PropVoiceVolume { get; set; } = 1;
+        public float PropMusicVolume { get; set; } = 0.5f;
+        public float PropVoiceVolume { get; set; } = 0.5f;
         public bool PropIsVoicing { get; set; } = false;
     }
 }

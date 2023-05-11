@@ -1,0 +1,34 @@
+﻿<Window x:Class="WPFNovella.MiniGameVersusNito"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFNovella"
+        mc:Ignorable="d"
+        Title="Born From The Ashes" Height="720" Width="1280" Icon="/knight.png" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Cursor="Arrow" Background="White" KeyUp="Window_KeyUp">
+    <Grid>
+
+        <Canvas x:Name="canvas" Loaded="canvas_Loaded">
+            <Image x:Name="player" HorizontalAlignment="Center" Height="79" VerticalAlignment="Top" Width="78" Source="/Resources/free-icon-knight-5510685.png" Canvas.Left="601" Canvas.Top="313"/>
+            <Image x:Name="enemy" Canvas.Top="40" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="78" Source="/free-icon-suicidal-7081354.png" Canvas.Left="880" />
+            <Image x:Name="enemy1" Canvas.Top="600" Height="79" Width="78" Source="/free-icon-suicidal-7081354.png" Canvas.Left="1025" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Image x:Name="enemy2" Canvas.Top="322" Height="78" Width="78" Source="/free-icon-suicidal-7081354.png" Canvas.Left="157" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Image x:Name="enemy3" Canvas.Top="524" Height="80" Width="78" Source="/free-icon-suicidal-7081354.png" Canvas.Left="586" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label x:Name="TimerLabel" Content="00:00" Canvas.Left="588" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Sitka Banner Semibold"/>
+            <Border x:Name="BorderStart" BorderBrush="Black" BorderThickness="2" Width="829" CornerRadius="20,20,12,12" Background="#FF231F1F" Opacity="0.97" Height="325" Canvas.Left="235" Canvas.Top="189" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden">
+                <TextBlock x:Name="InfoTextBlock" Text="" 
+           TextWrapping="Wrap" 
+           Foreground="White" 
+           VerticalAlignment="Center" 
+           HorizontalAlignment="Center" 
+           FontSize="35" 
+           FontFamily="Sitka Banner Semibold" 
+           Height="225" 
+           Width="670"
+           TextAlignment="Center"
+           Padding="0 0 0 0"/>
+            </Border>
+        </Canvas>
+
+    </Grid>
+</Window>
