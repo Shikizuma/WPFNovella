@@ -958,8 +958,15 @@ namespace WPFNovella
             FooterBorder.Visibility = Visibility.Collapsed;           
         }
 
-        void ChangeFrame(string text, string imageName = null)
+        private CancellationTokenSource printTokenSource = new CancellationTokenSource();
+
+        async Task ChangeFrame(string text, string imageName = null)
         {
+            // Отменяем предыдущую задачу, если есть
+            printTokenSource.Cancel();
+            printTokenSource = new CancellationTokenSource();
+            CancellationToken token = printTokenSource.Token;
+
             if (imageName == null)
                 FadeText();
             else
@@ -968,29 +975,33 @@ namespace WPFNovella
                 GameImage.Source = new BitmapImage(new Uri($"Resources\\{imageName}", UriKind.Relative));
             }
             InfoTextBox.Text = "";
-            foreach(char c in text)
+            foreach (char c in text)
             {
+                // Проверяем, не была ли отменена задача печати
+                token.ThrowIfCancellationRequested();
+
                 InfoTextBox.Text += c;
-                Task.Delay(20);
+                await Task.Delay(15, token);
             }
+            return;
         }
 
-        void StartStory()
+        async void StartStory()
         {
        
             counter++;        
 
             if (counter == 1)
             {
-                ChangeFrame((string)Application.Current.FindResource("startStory1"), "fotor-ai-202305030380.jpg");
+                 ChangeFrame((string)Application.Current.FindResource("startStory1"), "fotor-ai-202305030380.jpg");
             }
             else if (counter == 2)
             {
-                ChangeFrame((string)Application.Current.FindResource("startStory2"), "greaterFlame.jpg");         
+                 ChangeFrame((string)Application.Current.FindResource("startStory2"), "greaterFlame.jpg");         
             }
             else if (counter == 3)
             {
-                ChangeFrame((string)Application.Current.FindResource("startStory3"), "animalsFear.jpg");
+                 ChangeFrame((string)Application.Current.FindResource("startStory3"), "animalsFear.jpg");
             }
             else if (counter == 4)
             {
