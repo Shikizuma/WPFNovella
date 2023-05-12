@@ -245,6 +245,7 @@
     <EmbeddedResource Include="Resources\knight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <PackageReference Include="OpenAI" Version="1.7.2" />
     <Resource Include="fotor-ai-20230502223742.jpg" />
     <Resource Include="helmet.png" />
     <Resource Include="knight.png" />

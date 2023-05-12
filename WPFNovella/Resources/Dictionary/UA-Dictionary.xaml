@@ -4,7 +4,7 @@
   xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- String resource that can be localized -->
-    <system:String x:Key="startStory0">-На початку світ був холодним і похмурим місцем. Тієї дивної пори не існувало ні часу, ні життя, ні смерті, бо єдиними господарями пустельних земель були безсмертні дракони.</system:String>
+    <system:String x:Key="startStory0">-На початку світ був холодним і похмурим місцем. Тієї дивної пори не існувало ні часу, ні життя, ні смерті, бо єдиними господарями пустельних земель були безсмертні дракони. </system:String>
     <system:String x:Key="startStory1">-Їхні могутні тіла покривала дивовижна луска, завдяки якій вони жили вічно і були невразливими. Також дракони мали могутній артефакт – Початковий кристал, який міг зберігати життя. Так цей темний світ існував невідомий час, і його назвали Епохою Стародавніх.</system:String>
     <system:String x:Key="startStory2">-Але потім з'явилося Полум'я. Полум'я несло у собі чотири Великі Душі. Саме вони стали джерелом конфлікту. Невідомо, звідки прийшли майбутні володарі Душ. В Епоху Стародавніх не існувало чаклунства, яким ми його знаємо, а світ був єдиний.</system:String>
     <system:String x:Key="startStory3">-У темряві та тумані існували пригнічені жорстокими володарями істоти різної природи. Вони виживали в суворих умовах, без світла та надії, поки в надрах землі не виникло Полум'я. Можливо, саме воно і закликало нові форми життя з небуття, розділивши все, що існує на жар і холод, життя і смерть, світло і пітьму.</system:String>
@@ -43,7 +43,7 @@
     <system:String x:Key="mainStory17">*Через деякий час. Ви почули сзаду шум. Незгаслий почав акуратно повертатися у бік звуку*</system:String>
     <system:String x:Key="mainStory18">*Повернувшись Незгаслий завмер.. позаду нього був Ніто, який пильно дивився на незгаслого*</system:String>
     <system:String x:Key="mainStory19">*Різко діставши меч, Незгаслий, побіг у бік Ніто, після чого спробував зробити удар*</system:String>
-    <system:String x:Key="mainStory20">*Меч Незгаслий та Ніто схерстились у танці бою*</system:String>
+    <system:String x:Key="mainStory20">*Меч Незгаслого та Ніто схерстились у танці бою*</system:String>
     <system:String x:Key="mainStory21">*Незгаслий спробував нанести ще один удар*</system:String>
     <system:String x:Key="mainStory22">*Ніто вбив вас*</system:String>
     <system:String x:Key="mainStory23">*Незгаслий зробив вдачиний випад мечем, та пробив наскрізь тіло Ніто*</system:String>
@@ -112,6 +112,13 @@
     <system:String x:Key="btnString15">[Спробувати ухилитися]</system:String>
     <system:String x:Key="btnString16">[Обійти Гвіна і завдати йому удару]</system:String>
     <system:String x:Key="btnString17">Ти жалюгідний. [Зробити атаку спереду]</system:String>
+    <system:String x:Key="btnString18">Так.</system:String>
+    <system:String x:Key="btnString19">Ні. [Уйти]</system:String>
+    <system:String x:Key="btnString20">[Уйти]</system:String>
+
+
+    <system:String x:Key="mainStory10_1">В тебе ще є запитання?</system:String>
+    <system:String x:Key="mainStory10_2">Що тобі цікаво?</system:String>
 
     <system:String x:Key="storyGoodEnd0">-Ти вбив усіх володарів. Я.. Я дуже дякую тобі, за те що ти врятував наш світ.. Але..</system:String>
     <system:String x:Key="storyGoodEnd1">-В тобі 4 темна душа.. яку ти успадкував від Пігмея.. І треба також її віддати великому полум'ю..</system:String>

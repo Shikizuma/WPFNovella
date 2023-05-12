@@ -28,7 +28,7 @@ namespace WPFNovella
         private DispatcherTimer timer;
 
         private double playerX, playerY;
-        private double playerSpeed = 500;
+        private double playerSpeed = 350;
         Rect playerRect;
 
         Enemy[] enemies = new Enemy[4];

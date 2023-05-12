@@ -10,7 +10,7 @@
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="Transparent"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="Transparent"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="Transparent"/>
-        <Style TargetType="{x:Type TextBox}">
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -20,6 +20,7 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -28,8 +29,11 @@
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="true">
+                                <Setter Property="Opacity" TargetName="border" Value="0.95"/>
+                            </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="1"/>
+                                <Setter Property="Opacity" TargetName="border" Value="0.95"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
@@ -158,16 +162,28 @@
             <Border.Style>
                 <Style TargetType="Border">
                     <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
+                        <Trigger Property="IsEnabled" Value="true">
+                            <Setter Property="Opacity" Value="0.95"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="0.95"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <StackPanel Margin="193,0,193,0">
-                <TextBox Opacity="0.95" x:Name="InfoTextBox" Background="Transparent" BorderBrush="Transparent" SelectionBrush="Transparent"  FontSize="24" Padding="12, 16, 12, 12" FontFamily="Sitka Banner Semibold" TextWrapping="Wrap" Text="" Width="892" Height="208" Grid.Column="1" Foreground="#FFAB8D3A" IsReadOnly="True" IsUndoEnabled="False"/>
+            <StackPanel Margin="180,0,180,0" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBox Opacity="0.95" x:Name="InfoTextBox" TextAlignment="Left" Background="Transparent" 
+             BorderBrush="Transparent" SelectionBrush="Transparent" FontSize="24" Padding="12, 16, 12, 12" 
+             FontFamily="Sitka Banner Semibold" TextWrapping="Wrap" Text="" Width="912" Height="218" 
+             Foreground="#FFAB8D3A" IsReadOnly="True" FocusVisualStyle="{x:Null}" IsHitTestVisible="False" AllowDrop="False" IsTabStop="False" Focusable="False"
+            />
+                </ScrollViewer>
             </StackPanel>
         </Border>
+        <TextBox Opacity="0.95" x:Name="InputTextBox" Background="Black" BorderThickness="2" BorderBrush="#FFAB8D3A" FontSize="24" Padding="5, 12, 5, 5" FontFamily="Sitka Banner Semibold" TextWrapping="Wrap" Text="Input.." Foreground="#FFAB8D3A" Margin="193,226,193,188" Grid.ColumnSpan="3" PreviewMouseLeftButtonDown="InputTextBox_PreviewMouseLeftButtonDown" Visibility="Hidden"/>
+        <Button x:Name="RequestButton" Style="{DynamicResource ButtonAnswerStyle}" BorderThickness="2" BorderBrush="#FFAB8D3A" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="2" Content="Ask" Padding="8" HorizontalAlignment="Left" Margin="25,224,0,0" VerticalAlignment="Top" Width="89" Height="63" Foreground="#FFAB8D3A" Visibility="Hidden" Background="Black" Click="Request_Click"/>
+
         <Border x:Name="ArrowBorder" Grid.Column="2" Margin="25,43,25,43" Grid.Row="1" MouseLeftButtonDown="FooterBorder_MouseLeftButtonDown">
             <Border.Background>
                 <ImageBrush ImageSource="/Resources/right-arrow.png" />
@@ -179,6 +195,7 @@
         <Button x:Name="ButtonAnswerOne" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
         <Button x:Name="ButtonAnswerTwo" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,208,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
         <Button x:Name="ButtonAnswerThree" Style="{DynamicResource ButtonAnswerStyle}" FontFamily="Sitka Banner Semibold" FontSize="23" Grid.Column="1" Content="Text" Padding="15" HorizontalAlignment="Center" Margin="0,321,0,0" VerticalAlignment="Top" Width="Auto" Height="Auto" Foreground="#FFAB8D3A" Visibility="Hidden" Click="ButtonAnswer_Click"/>
+
         <Label x:Name="TheEndLabel" Grid.Column="1" Content="THE END" FontSize="150" Foreground="Black" HorizontalAlignment="Center" Margin="0,190,0,0" VerticalAlignment="Top" Height="198" Width="586" FontFamily="Sitka Banner Semibold" Visibility="Hidden"/>
     </Grid>
 </Window>

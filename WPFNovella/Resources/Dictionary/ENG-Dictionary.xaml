@@ -112,6 +112,12 @@
     <system:String x:Key="btnString15">[Attempt to dodge]</system:String>
     <system:String x:Key="btnString16">[Circle around Gwyn and strike him]</system:String>
     <system:String x:Key="btnString17">You're pathetic. [Perform a frontal attack]</system:String>
+    <system:String x:Key="btnString18">Yes.</system:String>
+    <system:String x:Key="btnString19">No. [Leave]</system:String>
+    <system:String x:Key="btnString20">[Leave]</system:String>
+
+    <system:String x:Key="mainStory10_1">Do you have any more questions?</system:String>
+    <system:String x:Key="mainStory10_2">What are you curious about?</system:String>
 
     <system:String x:Key="storyGoodEnd0">-You killed all the rulers. I.. I thank you so much for saving our world.. But..</system:String>
     <system:String x:Key="storyGoodEnd1">-You have a dark soul within you.. which you inherited from the Pygmy.. And it also needs to be returned to the great flame..</system:String>

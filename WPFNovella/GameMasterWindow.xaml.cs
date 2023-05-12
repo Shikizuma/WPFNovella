@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OpenAI_API;
+using OpenAI_API.Completions;
+using OpenAI_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -23,6 +26,7 @@ namespace WPFNovella
     /// </summary>
     public partial class GameMasterWindow : Window
     {
+        const string TOKEN = "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";
         public GameMasterWindow()
         {
             InitializeComponent();
@@ -177,6 +181,7 @@ namespace WPFNovella
                 ArrowBorder.Visibility = Visibility.Collapsed;
                 FooterBorder.IsEnabled = false;
                 ArrowBorder.IsEnabled = false;
+             
 
                 await Task.Delay(2000);
                 FadeButton();
@@ -353,56 +358,102 @@ namespace WPFNovella
             }
             else if (counter == 26)
             {
-                ChangeFrame((string)Application.Current.FindResource("mainStory12"), "1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg");
+                if (answerText == ButtonAnswerTwo.Content)
+                    isHardMode = false;
+                else
+                    isHardMode = true;
 
+                ButtonAnswerTwo.Visibility = Visibility.Hidden;
+                ButtonAnswerThree.Visibility = Visibility.Hidden;
+
+                ChangeFrame((string)Application.Current.FindResource("mainStory10_1"));
+                await Task.Delay(2000);
+
+                FadeButton();
+
+                ButtonAnswerTwo.Visibility = Visibility.Visible;
+                ButtonAnswerThree.Visibility = Visibility.Visible;
+
+                ButtonAnswerTwo.Content = (string)Application.Current.FindResource("btnString18");
+                ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString19");       
+            }
+            else if (counter == 27)
+            {
+                ButtonAnswerTwo.Visibility = Visibility.Hidden;
+                ButtonAnswerThree.Visibility = Visibility.Hidden;
+
+                if (answerText == ButtonAnswerTwo.Content)
+                {
+                    ChangeFrame((string)Application.Current.FindResource("mainStory10_2"));
+                    await Task.Delay(2000);
+
+                    FadeButton();
+
+                    InputTextBox.Visibility = Visibility.Visible;
+                    RequestButton.Visibility = Visibility.Visible;
+                    ButtonAnswerThree.Visibility = Visibility.Visible;
+
+                    ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString20");
+                }
+                else
+                {
+                    ChangeFrame((string)Application.Current.FindResource("mainStory12"), "1647197914_1-gamerwall-pro-p-dark-souls-koster-art-krasivie-oboi-2.jpg");
+
+                    ArrowBorder.Visibility = Visibility.Visible;
+
+                    FooterBorder.IsEnabled = true;
+                    ArrowBorder.IsEnabled = true;
+
+                    InputTextBox.Visibility = Visibility.Hidden;
+                    RequestButton.Visibility = Visibility.Hidden;
+                    ButtonAnswerTwo.Visibility = Visibility.Hidden;
+                    ButtonAnswerThree.Visibility = Visibility.Hidden;
+
+                    counter++;
+                }        
+            }       
+            else if (counter == 28)
+            {
                 ArrowBorder.Visibility = Visibility.Visible;
 
                 FooterBorder.IsEnabled = true;
                 ArrowBorder.IsEnabled = true;
 
+                InputTextBox.Visibility = Visibility.Hidden;
+                RequestButton.Visibility = Visibility.Hidden;
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
 
-                if(answerText == ButtonAnswerTwo.Content)
-                    isHardMode = false;
-                else 
-                    isHardMode = true;
-
-                counter++;
-
-            }
-            else if (counter == 27)
-            {
                 ChangeFrame((string)Application.Current.FindResource("mainStory13"), "compas.jpg");
-                counter++;
-            }
-            else if (counter == 28)
-            {
-                ChangeFrame((string)Application.Current.FindResource("mainStory14"), "priroda.jpg");
                 counter++;
             }
             else if (counter == 29)
             {
-                ChangeFrame((string)Application.Current.FindResource("mainStory15"), "katokombi.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory14"), "priroda.jpg");
                 counter++;
             }
             else if (counter == 30)
             {
-                ChangeFrame((string)Application.Current.FindResource("mainStory16"));       
+                ChangeFrame((string)Application.Current.FindResource("mainStory15"), "katokombi.jpg");
                 counter++;
             }
             else if (counter == 31)
             {
-                ChangeFrame((string)Application.Current.FindResource("mainStory17"), "nedryKatak.jpg");
+                ChangeFrame((string)Application.Current.FindResource("mainStory16"));       
                 counter++;
             }
             else if (counter == 32)
+            {
+                ChangeFrame((string)Application.Current.FindResource("mainStory17"), "nedryKatak.jpg");
+                counter++;
+            }
+            else if (counter == 33)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory18"), "nitoNear.jpg");            
                 PlaybackMusic("Resources\\1-07 Curse-Rotted Greatwood.mp3");
                 counter++;
             }
-            else if (counter == 33)
+            else if (counter == 34)
             {
 
                 ChangeFrame("");
@@ -422,7 +473,7 @@ namespace WPFNovella
                 ButtonAnswerThree.Visibility = Visibility.Visible;
 
             }
-            else if (counter == 34)
+            else if (counter == 35)
             {              
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -469,7 +520,7 @@ namespace WPFNovella
                 ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString12");
                 
             }
-            else if (counter == 35)
+            else if (counter == 36)
             {
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -492,33 +543,33 @@ namespace WPFNovella
                     counter++;
                 }
             }
-            else if (counter == 36)
+            else if (counter == 37)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory27"), "pustoshi.jpg");
                 PlaybackMusic("Resources\\1-18 Oceiros, The Consumed King.mp3");
                 counter++;
             }
-            else if (counter == 37)
+            else if (counter == 38)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory28"), "castleCharodeiki.jpg");
                 counter++;
             }
-            else if (counter == 38)
+            else if (counter == 39)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory29"), "IzalitaNear.jpg");
                 counter++;
             }
-            else if (counter == 39)
+            else if (counter == 40)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory30"));
                 counter++;
             }
-            else if (counter == 40)
+            else if (counter == 41)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory31"), "izolitaFace.jpg");
                 counter++;
             }
-            else if (counter == 41)
+            else if (counter == 42)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory32"));
 
@@ -536,7 +587,7 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
             }
-            else if (counter == 42)
+            else if (counter == 43)
             {
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -569,7 +620,7 @@ namespace WPFNovella
                     ButtonAnswerThree.Content = (string)Application.Current.FindResource("btnString15");
                 }
             }
-            else if (counter == 43)
+            else if (counter == 44)
             {            
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -655,7 +706,7 @@ namespace WPFNovella
                     ButtonAnswerThree.Content = $"{(string)Application.Current.FindResource("mainStory41")} [{counterSoulsInHero}/3]";
                 }
             }
-            else if (counter == 44)
+            else if (counter == 45)
             {
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -678,13 +729,13 @@ namespace WPFNovella
                     counter++;
                 }
             }
-            else if (counter == 45)
+            else if (counter == 46)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory47"), "mountains.jpg");
                 PlaybackMusic("Resources\\1-04 Iudex Gundyr.mp3");
                 counter++;
             }
-            else if (counter == 46)
+            else if (counter == 47)
             {           
                 ArrowBorder.Visibility = Visibility.Collapsed;
 
@@ -734,17 +785,17 @@ namespace WPFNovella
 
                 counter++;
             }
-            else if (counter == 47)
+            else if (counter == 48)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory54"));             
                 counter++;
             }
-            else if (counter == 48)
+            else if (counter == 49)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory55"), "gvinAttack.jpg");
                 counter++;
             }
-            else if (counter == 49)
+            else if (counter == 50)
             {
                 ArrowBorder.Visibility = Visibility.Collapsed;
 
@@ -777,7 +828,7 @@ namespace WPFNovella
                 ButtonAnswerTwo.Visibility = Visibility.Visible;
                 ButtonAnswerThree.Visibility = Visibility.Visible;
             }
-            else if (counter == 50)
+            else if (counter == 51)
             {
                 ButtonAnswerTwo.Visibility = Visibility.Hidden;
                 ButtonAnswerThree.Visibility = Visibility.Hidden;
@@ -853,7 +904,7 @@ namespace WPFNovella
                 ButtonAnswerThree.Visibility = Visibility.Visible;
             }
 
-            else if (counter == 51)
+            else if (counter == 52)
             {
                 ChangeFrame((string)Application.Current.FindResource("mainStory69"), "heroEnd.jpg");
 
@@ -906,6 +957,7 @@ namespace WPFNovella
             await Task.Delay(12000);
 
             FooterBorder.Visibility = Visibility.Collapsed;
+            FadeText();
             TheEndLabel.Visibility = Visibility.Visible;
         }
 
@@ -978,7 +1030,7 @@ namespace WPFNovella
                 token.ThrowIfCancellationRequested();
 
                 InfoTextBox.Text += c;
-                await Task.Delay(15, token);
+                await Task.Delay(25, token);
             }
             return;
         }
@@ -1058,5 +1110,38 @@ namespace WPFNovella
             }
         }
 
+        OpenAIAPI chatGPT = new OpenAIAPI(TOKEN); 
+
+        async Task GetResponse(CompletionRequest request)
+        {
+            var response = await chatGPT.Completions.CreateCompletionAsync(request);
+            InfoTextBox.Text = "";
+            InfoTextBox.Clear();
+            InfoTextBox.CaretIndex = 0;
+            ChangeFrame(response.Completions[0].Text);
+        }
+
+        void Request()
+        {
+            string question = "Уяви що ти Хранителька Полум'я Емілія, ти зустріла Незгаслого, його задача перемогти 3 лордів, котрі вкрали великі души. Дай відповідь на запитання: " + InputTextBox.Text;
+            CompletionRequest request = new CompletionRequest();
+            if (InputTextBox.Text != null)
+                request.Prompt = question;
+            request.Model = Model.DavinciText;
+            request.MaxTokens = 400;
+
+            GetResponse(request);
+        }
+
+        private void Request_Click(object sender, RoutedEventArgs e)
+        {
+            Request();
+            InputTextBox.Text = "";
+        }
+
+        private void InputTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            InputTextBox.Text = "";
+        }
     }
 }
